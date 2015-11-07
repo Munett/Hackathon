@@ -84,8 +84,8 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
 
     // 2
     textView.text =
-      textView.text.stringByReplacingOccurrencesOfString(findTextField.text,
-        withString: replaceTextField.text, options: nil, range: nil)
+      textView.text.stringByReplacingOccurrencesOfString(findTextField.text!,
+        withString: replaceTextField.text!, options: [], range: nil)
 
     // 3
     findTextField.text = nil
@@ -237,7 +237,7 @@ extension ViewController: UITextFieldDelegate {
 
 extension ViewController: UIImagePickerControllerDelegate {
   func imagePickerController(picker: UIImagePickerController,
-    didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+    didFinishPickingMediaWithInfo info: [String : AnyObject]) {
       let selectedPhoto = info[UIImagePickerControllerOriginalImage] as! UIImage
       let scaledImage = scaleImage(selectedPhoto, maxDimension: 640)
 
