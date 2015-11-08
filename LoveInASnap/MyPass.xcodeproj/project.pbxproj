@@ -12,7 +12,7 @@
 		041EDBD41A625CEC00ECDA48 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 041EDBD21A625CEC00ECDA48 /* Main.storyboard */; };
 		041EDBD61A625CEC00ECDA48 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 041EDBD51A625CEC00ECDA48 /* Images.xcassets */; };
 		041EDBD91A625CEC00ECDA48 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041EDBD71A625CEC00ECDA48 /* LaunchScreen.xib */; };
-		041EDBE51A625CED00ECDA48 /* LoveInASnapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041EDBE41A625CED00ECDA48 /* LoveInASnapTests.swift */; };
+		041EDBE51A625CED00ECDA48 /* MyPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041EDBE41A625CED00ECDA48 /* MyPass.swift */; };
 		041EDBF01A625D9200ECDA48 /* Envelope.png in Resources */ = {isa = PBXBuildFile; fileRef = 041EDBEE1A625D9200ECDA48 /* Envelope.png */; };
 		041EDBF11A625D9200ECDA48 /* Swap.png in Resources */ = {isa = PBXBuildFile; fileRef = 041EDBEF1A625D9200ECDA48 /* Swap.png */; };
 		7821EDD31A8C7A9C009573CF /* TesseractOCR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7821EDD21A8C7A9C009573CF /* TesseractOCR.framework */; };
@@ -41,13 +41,12 @@
 		041EDBD81A625CEC00ECDA48 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		041EDBDE1A625CED00ECDA48 /* MyPass.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyPass.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		041EDBE31A625CED00ECDA48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		041EDBE41A625CED00ECDA48 /* LoveInASnapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoveInASnapTests.swift; sourceTree = "<group>"; };
+		041EDBE41A625CED00ECDA48 /* MyPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPass.swift; sourceTree = "<group>"; };
 		041EDBEE1A625D9200ECDA48 /* Envelope.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Envelope.png; sourceTree = "<group>"; };
 		041EDBEF1A625D9200ECDA48 /* Swap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Swap.png; sourceTree = "<group>"; };
 		7821EDD21A8C7A9C009573CF /* TesseractOCR.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TesseractOCR.framework; path = LoveInASnap/TesseractOCR.framework; sourceTree = "<group>"; };
 		7821EDD41A8C7AA3009573CF /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tessdata; sourceTree = "<group>"; };
 		7821EDD61A8C7AC3009573CF /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
-		7821EDDA1A8C7AE9009573CF /* LoveInASnap-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LoveInASnap-Bridging-Header.h"; sourceTree = "<group>"; };
 		95D327FD1BEEF42B002DB2CF /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "../../../../../usr/lib/libstdc++.6.0.9.dylib"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,10 +77,9 @@
 				95D327FD1BEEF42B002DB2CF /* libstdc++.6.0.9.dylib */,
 				7821EDD21A8C7A9C009573CF /* TesseractOCR.framework */,
 				7821EDD61A8C7AC3009573CF /* CoreImage.framework */,
-				041EDBCB1A625CEC00ECDA48 /* LoveInASnap */,
-				041EDBE11A625CED00ECDA48 /* LoveInASnapTests */,
+				041EDBCB1A625CEC00ECDA48 /* MyPass */,
+				041EDBE11A625CED00ECDA48 /* MyPass */,
 				041EDBCA1A625CEC00ECDA48 /* Products */,
-				7821EDDA1A8C7AE9009573CF /* LoveInASnap-Bridging-Header.h */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -96,7 +94,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		041EDBCB1A625CEC00ECDA48 /* LoveInASnap */ = {
+		041EDBCB1A625CEC00ECDA48 /* MyPass */ = {
 			isa = PBXGroup;
 			children = (
 				041EDBCE1A625CEC00ECDA48 /* AppDelegate.swift */,
@@ -106,6 +104,7 @@
 				041EDBD71A625CEC00ECDA48 /* LaunchScreen.xib */,
 				041EDBCC1A625CEC00ECDA48 /* Supporting Files */,
 			);
+			name = MyPass;
 			path = LoveInASnap;
 			sourceTree = "<group>";
 		};
@@ -120,12 +119,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		041EDBE11A625CED00ECDA48 /* LoveInASnapTests */ = {
+		041EDBE11A625CED00ECDA48 /* MyPass */ = {
 			isa = PBXGroup;
 			children = (
-				041EDBE41A625CED00ECDA48 /* LoveInASnapTests.swift */,
+				041EDBE41A625CED00ECDA48 /* MyPass.swift */,
 				041EDBE21A625CED00ECDA48 /* Supporting Files */,
 			);
+			name = MyPass;
 			path = LoveInASnapTests;
 			sourceTree = "<group>";
 		};
@@ -251,7 +251,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				041EDBE51A625CED00ECDA48 /* LoveInASnapTests.swift in Sources */,
+				041EDBE51A625CED00ECDA48 /* MyPass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
