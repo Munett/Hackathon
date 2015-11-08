@@ -121,8 +121,10 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
   //MARK - DataCheck
   //-------------------------------------------------------------------------------------------------
   // Separa los nombres y quita los '<' sobrantes
-  func checkName(strName: String)
+  func checkName(var strName: String)
   {
+    strName = ChangeNumbersToLetters(strName)
+    
     var strSurName = ""
     var strLocalName = ""
     
@@ -197,6 +199,18 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
     strToReturn = strToReturn.stringByReplacingOccurrencesOfString("Z", withString: "2")
     strToReturn = strToReturn.stringByReplacingOccurrencesOfString("U", withString: "0")
     strToReturn = strToReturn.stringByReplacingOccurrencesOfString("A", withString: "4")
+    strToReturn = strToReturn.stringByReplacingOccurrencesOfString("I", withString: "1")
+    
+    return strToReturn
+  }
+  
+  func ChangeNumbersToLetters(str: String) -> String
+  {
+    var strToReturn = str.stringByReplacingOccurrencesOfString("0", withString: "O")
+    strToReturn = strToReturn.stringByReplacingOccurrencesOfString("2", withString: "Z")
+    strToReturn = strToReturn.stringByReplacingOccurrencesOfString("0", withString: "U")
+    strToReturn = strToReturn.stringByReplacingOccurrencesOfString("4", withString: "A")
+    strToReturn = strToReturn.stringByReplacingOccurrencesOfString("1", withString: "I")
     
     return strToReturn
   }
@@ -312,7 +326,7 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
       }
       
       // Checa el personal Number
-      if CheckNumVerif(strSecondRow[28...41]) != Int(ChangeLettersToNumbers(strSecondRow[42]))
+      if CheckNumVerif(strSecondRow[28...41]) != valoresABC[ChangeLettersToNumbers(strSecondRow[42])]
       {
         errorInValidation("Personal number invalido")
         return
