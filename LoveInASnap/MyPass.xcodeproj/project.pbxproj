@@ -24,6 +24,7 @@
 		9587FD561BEFC01600CC99F1 /* 2botones.png in Resources */ = {isa = PBXBuildFile; fileRef = 9587FD4F1BEFC01600CC99F1 /* 2botones.png */; };
 		9587FD5A1BEFC01600CC99F1 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9587FD531BEFC01600CC99F1 /* Icon.png */; };
 		9587FD5B1BEFC01600CC99F1 /* PantallaInicio.png in Resources */ = {isa = PBXBuildFile; fileRef = 9587FD541BEFC01600CC99F1 /* PantallaInicio.png */; };
+		9587FD5E1BEFC6AA00CC99F1 /* PantallaInicioconbotones.png in Resources */ = {isa = PBXBuildFile; fileRef = 9587FD5D1BEFC6AA00CC99F1 /* PantallaInicioconbotones.png */; };
 		95D327FE1BEEF42B002DB2CF /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 95D327FD1BEEF42B002DB2CF /* libstdc++.6.0.9.dylib */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,7 @@
 		9587FD4F1BEFC01600CC99F1 /* 2botones.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2botones.png; sourceTree = "<group>"; };
 		9587FD531BEFC01600CC99F1 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		9587FD541BEFC01600CC99F1 /* PantallaInicio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PantallaInicio.png; sourceTree = "<group>"; };
+		9587FD5D1BEFC6AA00CC99F1 /* PantallaInicioconbotones.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PantallaInicioconbotones.png; sourceTree = "<group>"; };
 		95D327FD1BEEF42B002DB2CF /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "../../../../../usr/lib/libstdc++.6.0.9.dylib"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -156,6 +158,7 @@
 		9587FD4E1BEFC01600CC99F1 /* ios app */ = {
 			isa = PBXGroup;
 			children = (
+				9587FD5D1BEFC6AA00CC99F1 /* PantallaInicioconbotones.png */,
 				9587FD4F1BEFC01600CC99F1 /* 2botones.png */,
 				9587FD531BEFC01600CC99F1 /* Icon.png */,
 				9587FD541BEFC01600CC99F1 /* PantallaInicio.png */,
@@ -250,6 +253,7 @@
 				041EDBF01A625D9200ECDA48 /* Envelope.png in Resources */,
 				041EDBF11A625D9200ECDA48 /* Swap.png in Resources */,
 				041EDBD91A625CEC00ECDA48 /* LaunchScreen.xib in Resources */,
+				9587FD5E1BEFC6AA00CC99F1 /* PantallaInicioconbotones.png in Resources */,
 				9587FD561BEFC01600CC99F1 /* 2botones.png in Resources */,
 				9587FD5A1BEFC01600CC99F1 /* Icon.png in Resources */,
 				041EDBD61A625CEC00ECDA48 /* Images.xcassets in Resources */,

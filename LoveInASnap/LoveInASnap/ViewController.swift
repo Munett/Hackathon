@@ -92,18 +92,21 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
   
   func showInfo()
   {
-    print("PERSONAL INFORMATION:", separator: "", terminator: "\n")
-    print("Name: " + self.givenName + " " + self.surName , separator: "", terminator: "\n")
-    print("Sex: " + self.sex , separator: "", terminator: "\n")
-    print("Birth Date (MM/DD/YY): " + self.birthDate[2...3] + "/" + self.birthDate[4...5] + "/" + self.birthDate[0...1],
-      separator: "", terminator: "\n")
-    print("Nationality: " + self.nationality , separator: "", terminator: "\n")
-    print("--------------------------------------------------------------------------", separator: "", terminator: "\n")
-    print("PASSPORT INFORMATION:", separator: "", terminator: "\n")
-    print("Issuing Country: " + self.issuingCountry , separator: "", terminator: "\n")
-    print("Passport Number: " + self.passportNumber , separator: "", terminator: "\n")
-    print("Expiration Date (MM/DD/YY): " + self.expDate[2...3] + "/" + self.expDate[4...5] + "/" + self.expDate[0...1],
-      separator: "", terminator: "\n")
+    let strInfo = "PERSONAL INFORMATION: \n" + "Name: " + self.givenName + " " + self.surName + "\n" + "Sex: " +
+      self.sex + "\n" + "Birth Date (MM/DD/YY): " + self.birthDate[2...3] + "/" + self.birthDate[4...5] + "/" +
+      self.birthDate[0...1] + "\n" + "Nationality: " + self.nationality + "\n" +
+      "-------------------------------" + "\n" +
+      "PASSPORT INFORMATION:" + "\n" + "Issuing Country: " + self.issuingCountry + "\n" + "Passport Number: " +
+      self.passportNumber + "\n" + "Expiration Date (MM/DD/YY): " + self.expDate[2...3] + "/" + self.expDate[4...5] +
+      "/" + self.expDate[0...1]
+    
+    let alert = UIAlertController(title: "Pasport Scanned!", message: strInfo,
+      preferredStyle: UIAlertControllerStyle.Alert)
+
+    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+    self.presentViewController(alert, animated: true, completion: nil)
+    
+    //print(strInfo, separator: "", terminator: "\n")
   }
   
   func fetchLog()
@@ -318,7 +321,12 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
   
   func errorInValidation(strError: String)
   {
-    print(strError, separator: " ", terminator: "\n")
+    let alert = UIAlertController(title: "Error", message: strError, preferredStyle: UIAlertControllerStyle.Alert)
+    
+    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+    self.presentViewController(alert, animated: true, completion: nil)
+    
+    //print(strError, separator: " ", terminator: "\n")
   }
   
   //-------------------------------------------------------------------------------------------------

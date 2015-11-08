@@ -35,7 +35,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2botones.png" translatesAutoresizingMaskIntoConstraints="NO" id="hon-9O-RF6">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PantallaInicioconbotones.png" translatesAutoresizingMaskIntoConstraints="NO" id="hon-9O-RF6">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <animations/>
                             </imageView>
@@ -118,7 +118,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FRe-ln-Rdw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-109" y="26"/>
+            <point key="canvasLocation" x="-102.5" y="-50.5"/>
         </scene>
         <!--Scan a passport-->
         <scene sceneID="ufC-wZ-h7g">
@@ -132,7 +132,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2botones.png" translatesAutoresizingMaskIntoConstraints="NO" id="5Xk-Lh-gnB">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PantallaInicioconbotones.png" translatesAutoresizingMaskIntoConstraints="NO" id="5Xk-Lh-gnB">
                                 <rect key="frame" x="-4" y="64" width="383" height="603"/>
                                 <animations/>
                             </imageView>
@@ -151,13 +151,6 @@
                                     <action selector="backgroundTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="cZ6-qc-X9S"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Snap/upload a clear picture of your passport then edit." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="12" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="6ma-5u-o2n">
-                                <rect key="frame" x="8" y="386" width="359" height="33.5"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3C8-6d-WmS">
                                 <rect key="frame" x="63" y="132" width="248" height="221"/>
                                 <subviews>
@@ -213,20 +206,27 @@
                                     <action selector="save" destination="vXZ-lx-hvc" eventType="touchUpInside" id="zDd-gx-RY7"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Snap/upload a clear picture of your passport then edit." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="12" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="6ma-5u-o2n">
+                                <rect key="frame" x="4" y="430" width="367" height="33.5"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <constraints>
                             <constraint firstItem="rVd-zh-lO4" firstAttribute="leading" secondItem="5Xk-Lh-gnB" secondAttribute="trailing" constant="-184" id="0dK-jr-35G"/>
                             <constraint firstItem="5Xk-Lh-gnB" firstAttribute="top" secondItem="TyZ-Rd-pJC" secondAttribute="bottom" id="Itx-df-tfi"/>
-                            <constraint firstItem="3C8-6d-WmS" firstAttribute="top" secondItem="6ma-5u-o2n" secondAttribute="bottom" constant="-287.5" id="LN5-fA-PiB"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="6ma-5u-o2n" secondAttribute="trailing" constant="-8" id="MH5-UA-c5Q"/>
+                            <constraint firstItem="3C8-6d-WmS" firstAttribute="top" secondItem="6ma-5u-o2n" secondAttribute="bottom" constant="-331.5" id="LN5-fA-PiB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="6ma-5u-o2n" secondAttribute="trailing" constant="-12" id="MH5-UA-c5Q"/>
                             <constraint firstItem="03X-da-6SF" firstAttribute="top" secondItem="5Xk-Lh-gnB" secondAttribute="bottom" id="MqR-Ho-OQ9"/>
                             <constraint firstItem="5Xk-Lh-gnB" firstAttribute="leading" secondItem="Pm6-fr-Yvv" secondAttribute="leadingMargin" constant="-20" id="TNj-9S-1WT"/>
-                            <constraint firstItem="6ma-5u-o2n" firstAttribute="leading" secondItem="Pm6-fr-Yvv" secondAttribute="leadingMargin" constant="-8" id="TTv-fe-RO6"/>
+                            <constraint firstItem="6ma-5u-o2n" firstAttribute="leading" secondItem="Pm6-fr-Yvv" secondAttribute="leadingMargin" constant="-12" id="TTv-fe-RO6"/>
                             <constraint firstItem="BSw-gM-CTX" firstAttribute="top" secondItem="Pm6-fr-Yvv" secondAttribute="top" id="YMC-bm-gcr"/>
                             <constraint firstAttribute="trailing" secondItem="BSw-gM-CTX" secondAttribute="trailing" id="YgM-pL-Y8O"/>
                             <constraint firstItem="InM-Rb-jXE" firstAttribute="centerX" secondItem="BSw-gM-CTX" secondAttribute="centerX" constant="-83.5" id="aRN-S1-Gmx"/>
-                            <constraint firstItem="6ma-5u-o2n" firstAttribute="top" secondItem="TyZ-Rd-pJC" secondAttribute="bottom" constant="322" id="att-VU-WMp"/>
+                            <constraint firstItem="6ma-5u-o2n" firstAttribute="top" secondItem="TyZ-Rd-pJC" secondAttribute="bottom" constant="366" id="att-VU-WMp"/>
                             <constraint firstItem="5Xk-Lh-gnB" firstAttribute="top" secondItem="LVg-ev-ijX" secondAttribute="bottom" constant="-288" id="cst-Jc-xcV"/>
                             <constraint firstItem="InM-Rb-jXE" firstAttribute="top" secondItem="3C8-6d-WmS" secondAttribute="bottom" constant="239" id="cyP-rk-1S5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="5Xk-Lh-gnB" secondAttribute="trailing" constant="-20" id="fZT-Bc-6RZ"/>
@@ -244,10 +244,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-109.5" y="654.5"/>
+            <point key="canvasLocation" x="-102.5" y="678.5"/>
         </scene>
     </scenes>
     <resources>
-        <image name="2botones.png" width="640" height="1136"/>
+        <image name="PantallaInicioconbotones.png" width="640" height="1136"/>
     </resources>
 </document>
