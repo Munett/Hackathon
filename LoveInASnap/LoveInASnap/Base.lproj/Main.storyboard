@@ -1,12 +1,99 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="0Bo-uN-YZN">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Navigation Controller-->
+        <scene sceneID="pa0-Hk-lWh">
+            <objects>
+                <navigationController id="0Bo-uN-YZN" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fVe-Ia-18g">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="7He-cc-d3h" kind="relationship" relationship="rootViewController" id="rzF-hL-tdb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="50C-wy-6YL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-909" y="400"/>
+        </scene>
+        <!--Welcome-->
+        <scene sceneID="M9z-5F-Pll">
+            <objects>
+                <viewController id="7He-cc-d3h" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ws3-il-Nng"/>
+                        <viewControllerLayoutGuide type="bottom" id="Vv1-H0-OYu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Y2E-8w-xn2">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u7S-cY-gqE">
+                                <rect key="frame" x="201" y="356" width="35" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Scan"/>
+                                <connections>
+                                    <segue destination="vXZ-lx-hvc" kind="push" id="EDK-Hn-yVQ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kzv-7Z-hwc">
+                                <rect key="frame" x="65" y="356" width="44" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Check"/>
+                                <connections>
+                                    <segue destination="Xws-k4-IBa" kind="push" id="BK0-VB-9qm"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Welcome" id="Qzd-d0-h94"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ypm-aG-Bsd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-518" y="400"/>
+        </scene>
+        <!--All passports-->
+        <scene sceneID="MwQ-nd-BJC">
+            <objects>
+                <tableViewController id="Xws-k4-IBa" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="elc-dH-tAo">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="vLB-xN-n49">
+                                <rect key="frame" x="0.0" y="92" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vLB-xN-n49" id="EfK-2q-D4I">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <animations/>
+                                </tableViewCellContentView>
+                                <animations/>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Xws-k4-IBa" id="XMg-CY-zVb"/>
+                            <outlet property="delegate" destination="Xws-k4-IBa" id="POg-TH-QvZ"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="All passports" id="JC4-e1-Igg"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FRe-ln-Rdw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-109" y="26"/>
+        </scene>
+        <!--Scan a passport-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="MyPass" customModuleProvider="target" sceneMemberID="viewController">
@@ -19,7 +106,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BSw-gM-CTX">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
                                 <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <state key="normal">
@@ -29,33 +116,15 @@
                                     <action selector="backgroundTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="cZ6-qc-X9S"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Snap/upload a clear picture of your poem then edit below. Tap outside of the text box once your sweet nothings are complete." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="12" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="6ma-5u-o2n">
-                                <rect key="frame" x="26" y="30" width="268" height="49"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Snap/upload a clear picture of your passport then edit below." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="12" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="6ma-5u-o2n">
+                                <rect key="frame" x="12" y="75" width="296" height="33.5"/>
                                 <animations/>
-                                <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D30-HR-s1J">
-                                <rect key="frame" x="62" y="520" width="258" height="42"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="42" id="ICa-N8-17i"/>
-                                    <constraint firstAttribute="width" constant="258" id="oss-AX-zZL"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="16"/>
-                                <inset key="titleEdgeInsets" minX="-570" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="185" maxY="0.0"/>
-                                <state key="normal" title="Share with your Beloved" image="Envelope.png">
-                                    <color key="titleColor" red="0.20823948410000001" green="0.48525439399999998" blue="0.94421184390000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="sharePoem:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="7ED-do-cDh"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3C8-6d-WmS">
-                                <rect key="frame" x="36" y="88" width="248" height="221"/>
+                                <rect key="frame" x="36" y="132" width="248" height="221"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LVg-ev-ijX">
                                         <rect key="frame" x="1" y="1" width="246" height="219"/>
@@ -80,35 +149,42 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="InM-Rb-jXE">
-                                <rect key="frame" x="41" y="339" width="239" height="30"/>
+                                <rect key="frame" x="84" y="367" width="153" height="30"/>
                                 <animations/>
-                                <fontDescription key="fontDescription" name="Cochin-Bold" family="Cochin" pointSize="15"/>
-                                <state key="normal" title="Snap/Upload a picture of your Poem">
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Snap/Upload a picture">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="takePhoto:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="6T0-wI-NsH"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rVd-zh-lO4">
+                                <rect key="frame" x="143" y="420" width="34" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="save" destination="vXZ-lx-hvc" eventType="touchUpInside" id="zDd-gx-RY7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
-                        <color key="backgroundColor" red="0.90836154400000002" green="0.9329398404" blue="0.94421184390000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="6ma-5u-o2n" firstAttribute="top" secondItem="TyZ-Rd-pJC" secondAttribute="bottom" constant="10" id="AOU-ke-QZo"/>
-                            <constraint firstItem="3C8-6d-WmS" firstAttribute="top" secondItem="6ma-5u-o2n" secondAttribute="bottom" constant="10" id="LN5-fA-PiB"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="6ma-5u-o2n" secondAttribute="trailing" constant="10" id="MH5-UA-c5Q"/>
-                            <constraint firstItem="6ma-5u-o2n" firstAttribute="leading" secondItem="Pm6-fr-Yvv" secondAttribute="leadingMargin" constant="10" id="TTv-fe-RO6"/>
+                            <constraint firstItem="6ma-5u-o2n" firstAttribute="top" secondItem="TyZ-Rd-pJC" secondAttribute="bottom" constant="11" id="AOU-ke-QZo"/>
+                            <constraint firstItem="3C8-6d-WmS" firstAttribute="top" secondItem="6ma-5u-o2n" secondAttribute="bottom" constant="24" id="LN5-fA-PiB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="6ma-5u-o2n" secondAttribute="trailing" constant="-4" id="MH5-UA-c5Q"/>
+                            <constraint firstItem="6ma-5u-o2n" firstAttribute="leading" secondItem="Pm6-fr-Yvv" secondAttribute="leadingMargin" constant="-4" id="TTv-fe-RO6"/>
                             <constraint firstItem="BSw-gM-CTX" firstAttribute="top" secondItem="Pm6-fr-Yvv" secondAttribute="top" id="YMC-bm-gcr"/>
                             <constraint firstAttribute="trailing" secondItem="BSw-gM-CTX" secondAttribute="trailing" id="YgM-pL-Y8O"/>
                             <constraint firstItem="InM-Rb-jXE" firstAttribute="centerX" secondItem="BSw-gM-CTX" secondAttribute="centerX" id="aRN-S1-Gmx"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="D30-HR-s1J" secondAttribute="trailing" constant="-16" id="cvG-IS-ZGQ"/>
-                            <constraint firstItem="InM-Rb-jXE" firstAttribute="top" secondItem="3C8-6d-WmS" secondAttribute="bottom" constant="30" id="cyP-rk-1S5"/>
+                            <constraint firstItem="InM-Rb-jXE" firstAttribute="top" secondItem="3C8-6d-WmS" secondAttribute="bottom" constant="14" id="cyP-rk-1S5"/>
+                            <constraint firstItem="rVd-zh-lO4" firstAttribute="top" secondItem="InM-Rb-jXE" secondAttribute="bottom" constant="23" id="m4B-AC-w4F"/>
                             <constraint firstItem="BSw-gM-CTX" firstAttribute="leading" secondItem="Pm6-fr-Yvv" secondAttribute="leading" id="tRI-ZL-9qv"/>
                             <constraint firstAttribute="centerX" secondItem="3C8-6d-WmS" secondAttribute="centerX" id="tyq-35-cmI"/>
-                            <constraint firstItem="03X-da-6SF" firstAttribute="top" secondItem="BSw-gM-CTX" secondAttribute="bottom" id="xlN-o0-UGu"/>
-                            <constraint firstItem="03X-da-6SF" firstAttribute="top" secondItem="D30-HR-s1J" secondAttribute="bottom" constant="6" id="yux-r7-uTA"/>
+                            <constraint firstItem="rVd-zh-lO4" firstAttribute="centerX" secondItem="Pm6-fr-Yvv" secondAttribute="centerX" id="wdJ-9S-3lY"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Scan a passport" id="f8U-7g-leJ"/>
                     <connections>
                         <outlet property="textView" destination="LVg-ev-ijX" id="hkC-pT-NGf"/>
                         <outlet property="topMarginConstraint" destination="AOU-ke-QZo" id="3De-8G-85L"/>
@@ -116,10 +192,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="112" y="281.16000000000003"/>
+            <point key="canvasLocation" x="-109" y="655"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="Envelope.png" width="653" height="373"/>
-    </resources>
 </document>

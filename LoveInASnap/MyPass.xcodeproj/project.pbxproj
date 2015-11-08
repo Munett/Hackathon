@@ -18,6 +18,9 @@
 		7821EDD31A8C7A9C009573CF /* TesseractOCR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7821EDD21A8C7A9C009573CF /* TesseractOCR.framework */; };
 		7821EDD51A8C7AA3009573CF /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = 7821EDD41A8C7AA3009573CF /* tessdata */; };
 		7821EDD71A8C7AC3009573CF /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7821EDD61A8C7AC3009573CF /* CoreImage.framework */; };
+		9587FD441BEF957D00CC99F1 /* ResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9587FD431BEF957D00CC99F1 /* ResultsTableViewController.swift */; };
+		9587FD471BEF963A00CC99F1 /* MyPass.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9587FD451BEF963A00CC99F1 /* MyPass.xcdatamodeld */; };
+		9587FD4D1BEFB8B500CC99F1 /* Passport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9587FD4C1BEFB8B500CC99F1 /* Passport.swift */; };
 		95D327FE1BEEF42B002DB2CF /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 95D327FD1BEEF42B002DB2CF /* libstdc++.6.0.9.dylib */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +50,9 @@
 		7821EDD21A8C7A9C009573CF /* TesseractOCR.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TesseractOCR.framework; path = LoveInASnap/TesseractOCR.framework; sourceTree = "<group>"; };
 		7821EDD41A8C7AA3009573CF /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tessdata; sourceTree = "<group>"; };
 		7821EDD61A8C7AC3009573CF /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		9587FD431BEF957D00CC99F1 /* ResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsTableViewController.swift; sourceTree = "<group>"; };
+		9587FD461BEF963A00CC99F1 /* MyPass.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyPass.xcdatamodel; sourceTree = "<group>"; };
+		9587FD4C1BEFB8B500CC99F1 /* Passport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Passport.swift; sourceTree = "<group>"; };
 		95D327FD1BEEF42B002DB2CF /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "../../../../../usr/lib/libstdc++.6.0.9.dylib"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,9 +105,12 @@
 			children = (
 				041EDBCE1A625CEC00ECDA48 /* AppDelegate.swift */,
 				041EDBD01A625CEC00ECDA48 /* ViewController.swift */,
-				041EDBD21A625CEC00ECDA48 /* Main.storyboard */,
+				9587FD431BEF957D00CC99F1 /* ResultsTableViewController.swift */,
 				041EDBD51A625CEC00ECDA48 /* Images.xcassets */,
+				041EDBD21A625CEC00ECDA48 /* Main.storyboard */,
 				041EDBD71A625CEC00ECDA48 /* LaunchScreen.xib */,
+				9587FD451BEF963A00CC99F1 /* MyPass.xcdatamodeld */,
+				9587FD4C1BEFB8B500CC99F1 /* Passport.swift */,
 				041EDBCC1A625CEC00ECDA48 /* Supporting Files */,
 			);
 			name = MyPass;
@@ -183,7 +192,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0710;
-				ORGANIZATIONNAME = "Lyndsey Scott";
+				ORGANIZATIONNAME = ARC;
 				TargetAttributes = {
 					041EDBC81A625CEC00ECDA48 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -242,6 +251,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9587FD441BEF957D00CC99F1 /* ResultsTableViewController.swift in Sources */,
+				9587FD471BEF963A00CC99F1 /* MyPass.xcdatamodeld in Sources */,
+				9587FD4D1BEFB8B500CC99F1 /* Passport.swift in Sources */,
 				041EDBD11A625CEC00ECDA48 /* ViewController.swift in Sources */,
 				041EDBCF1A625CEC00ECDA48 /* AppDelegate.swift in Sources */,
 			);
@@ -473,6 +485,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		9587FD451BEF963A00CC99F1 /* MyPass.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9587FD461BEF963A00CC99F1 /* MyPass.xcdatamodel */,
+			);
+			currentVersion = 9587FD461BEF963A00CC99F1 /* MyPass.xcdatamodel */;
+			path = MyPass.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 041EDBC11A625CEC00ECDA48 /* Project object */;
 }

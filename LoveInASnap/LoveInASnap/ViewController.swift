@@ -1,12 +1,18 @@
 //
-//  ViewController.swift
+//  AppDelegate.swift
+//  MyPass
+//
+//  Created by Alejandro De la Rosa Cortés on 08/11/15.
 //
 
 import UIKit
 import Foundation
+import CoreData
 
 class ViewController: UIViewController, UITextViewDelegate, UINavigationControllerDelegate
 {
+  // Retreive the managedObjectContext from AppDelegate
+  let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
   
   @IBOutlet weak var textView: UITextView!
   @IBOutlet weak var topMarginConstraint: NSLayoutConstraint!
@@ -32,23 +38,19 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
   var expDate = ""
   
   var valoresABC: [String: Int] =
-  ["1":1, "2":2,"3":3, "4":4,
-    "5":5, "6":6, "7":7, "8":8,
-    "9":9, "0":0,
-    "A":10, "B":11,"C":12, "D":13,
-    "E":14, "F":15, "G":16, "H":17,
-    "I":18, "J":19,"K":20, "L":21,
-    "M":22, "N":23, "O":24, "P":25,
-    "Q":26, "R":27,"S":28, "T":29,
-    "U":30, "V":31, "W":32, "X":33,
+  ["1":1, "2":2,"3":3, "4":4, "5":5, "6":6, "7":7, "8":8, "9":9, "0":0,
+    "A":10, "B":11,"C":12, "D":13, "E":14, "F":15, "G":16, "H":17, "I":18, "J":19,"K":20, "L":21,
+    "M":22, "N":23, "O":24, "P":25, "Q":26, "R":27,"S":28, "T":29, "U":30, "V":31, "W":32, "X":33,
     "Y":34 ,"Z":35, "<":0]
   
   var activityIndicator:UIActivityIndicatorView!
   var originalTopMargin:CGFloat!
   
+  //-------------------------------------------------------------------------------------------------
   override func viewDidLoad()
   {
     super.viewDidLoad()
+    fetchLog()
   }
   
   override func viewDidAppear(animated: Bool)
@@ -58,55 +60,15 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
     originalTopMargin = topMarginConstraint.constant
   }
   
-  @IBAction func takePhoto(sender: AnyObject)
+  //-------------------------------------------------------------------------------------------------
+  @IBAction func backgroundTapped(sender: AnyObject)
   {
-    // 1
     view.endEditing(true)
     moveViewDown()
-    
-    // 2
-    let imagePickerActionSheet = UIAlertController(title: "Snap/Upload Photo",
-      message: nil, preferredStyle: .ActionSheet)
-    
-    // 3
-    if UIImagePickerController.isSourceTypeAvailable(.Camera)
-    {
-      let cameraButton = UIAlertAction(title: "Take Photo", style: .Default)
-        {
-          (alert) -> Void in
-          let imagePicker = UIImagePickerController()
-          imagePicker.delegate = self
-          imagePicker.sourceType = .Camera
-          self.presentViewController(imagePicker, animated: true, completion: nil)
-      }
-      imagePickerActionSheet.addAction(cameraButton)
-    }
-    
-    // 4
-    let libraryButton = UIAlertAction(title: "Choose Existing", style: .Default)
-      {
-        (alert) -> Void in
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = .PhotoLibrary
-        self.presentViewController(imagePicker, animated: true, completion: nil)
-    }
-    
-    imagePickerActionSheet.addAction(libraryButton)
-    
-    // 5
-    let cancelButton = UIAlertAction(title: "Cancel", style: .Cancel)
-      {
-        (alert) -> Void in
-    }
-    
-    imagePickerActionSheet.addAction(cancelButton)
-    
-    // 6
-    presentViewController(imagePickerActionSheet, animated: true, completion: nil)
   }
   
-  @IBAction func sharePoem(sender: AnyObject)
+  //-------------------------------------------------------------------------------------------------
+  @IBAction func save()
   {
     // 1
     if textView.text.isEmpty
@@ -114,25 +76,50 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
       return
     }
     
-    // 2
-    let activityViewController = UIActivityViewController(activityItems: [textView.text], applicationActivities: nil)
-    
-    // 3
-    let excludeActivities = [ UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll,
-      UIActivityTypeAddToReadingList, UIActivityTypePostToFlickr, UIActivityTypePostToVimeo]
-    
-    activityViewController.excludedActivityTypes = excludeActivities
-    
-    // 4
-    presentViewController(activityViewController, animated: true, completion: nil)
+    checkData(textView.text)
+    saveNewItem()
   }
   
-  @IBAction func backgroundTapped(sender: AnyObject)
+  func saveNewItem()
   {
-    view.endEditing(true)
-    moveViewDown()
+    _ = Passport.createInManagedObjectContext(self.managedObjectContext, documentType: self.documentType,
+      issuingCountry: self.issuingCountry, surName: self.surName, givenName: self.givenName,
+      passportNumber: self.passportNumber, nationality: self.nationality, birthDate: self.birthDate,
+      sex: self.sex, personalNumber: self.personalNumber, expDate: self.expDate)
+    
+    showInfo()
   }
   
+  func showInfo()
+  {
+    print("PERSONAL INFORMATION:", separator: "", terminator: "\n")
+    print("Name: " + self.givenName + " " + self.surName , separator: "", terminator: "\n")
+    print("Sex: " + self.sex , separator: "", terminator: "\n")
+    print("Birth Date (MM/DD/YY): " + self.birthDate[2...3] + "/" + self.birthDate[4...5] + "/" + self.birthDate[0...1],
+      separator: "", terminator: "\n")
+    print("Nationality: " + self.nationality , separator: "", terminator: "\n")
+    print("--------------------------------------------------------------------------", separator: "", terminator: "\n")
+    print("PASSPORT INFORMATION:", separator: "", terminator: "\n")
+    print("Issuing Country: " + self.issuingCountry , separator: "", terminator: "\n")
+    print("Passport Number: " + self.passportNumber , separator: "", terminator: "\n")
+    print("Expiration Date (MM/DD/YY): " + self.expDate[2...3] + "/" + self.expDate[4...5] + "/" + self.expDate[0...1],
+      separator: "", terminator: "\n")
+  }
+  
+  func fetchLog()
+  {
+    let fetchRequest = NSFetchRequest(entityName: "Passport")
+    
+    // Create a sort descriptor object that sorts on the "title"
+    // property of the Core Data object
+    let sortDescriptor = NSSortDescriptor(key: "givenName", ascending: true)
+    
+    // Set the list of sort descriptors in the fetch request,
+    // so it includes the sort descriptor
+    fetchRequest.sortDescriptors = [sortDescriptor]
+  }
+  
+  //-------------------------------------------------------------------------------------------------
   // Separa los nombres y quita los '<' sobrantes
   func checkName(strName: String)
   {
@@ -334,33 +321,7 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
     print(strError, separator: " ", terminator: "\n")
   }
   
-  func scaleImage(image: UIImage, maxDimension: CGFloat) -> UIImage
-  {
-    
-    var scaledSize = CGSizeMake(maxDimension, maxDimension)
-    var scaleFactor:CGFloat
-    
-    if image.size.width > image.size.height
-    {
-      scaleFactor = image.size.height / image.size.width
-      scaledSize.width = maxDimension
-      scaledSize.height = scaledSize.width * scaleFactor
-    }
-    else
-    {
-      scaleFactor = image.size.width / image.size.height
-      scaledSize.height = maxDimension
-      scaledSize.width = scaledSize.height * scaleFactor
-    }
-    
-    UIGraphicsBeginImageContext(scaledSize)
-    image.drawInRect(CGRectMake(0, 0, scaledSize.width, scaledSize.height))
-    let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
-    UIGraphicsEndImageContext()
-    
-    return scaledImage
-  }
-  
+  //-------------------------------------------------------------------------------------------------
   // Metodos del Activity Indicator
   func addActivityIndicator()
   {
@@ -377,6 +338,7 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
     activityIndicator = nil
   }
   
+  //-------------------------------------------------------------------------------------------------
   // Metodos para el resign del Teclado
   func moveViewUp()
   {
@@ -405,6 +367,34 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
     })
   }
   
+  //-------------------------------------------------------------------------------------------------
+  func scaleImage(image: UIImage, maxDimension: CGFloat) -> UIImage
+  {
+    
+    var scaledSize = CGSizeMake(maxDimension, maxDimension)
+    var scaleFactor:CGFloat
+    
+    if image.size.width > image.size.height
+    {
+      scaleFactor = image.size.height / image.size.width
+      scaledSize.width = maxDimension
+      scaledSize.height = scaledSize.width * scaleFactor
+    }
+    else
+    {
+      scaleFactor = image.size.width / image.size.height
+      scaledSize.height = maxDimension
+      scaledSize.width = scaledSize.height * scaleFactor
+    }
+    
+    UIGraphicsBeginImageContext(scaledSize)
+    image.drawInRect(CGRectMake(0, 0, scaledSize.width, scaledSize.height))
+    let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    
+    return scaledImage
+  }
+  
   func performImageRecognition(image: UIImage)
   {
     // 1
@@ -430,11 +420,57 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
     textView.text = tesseract.recognizedText
     textView.editable = true
     
-    checkData(textView.text)
-    print(documentType + issuingCountry + surName + givenName + passportNumber + nationality + birthDate + sex + personalNumber + expDate, separator: " ", terminator: "\n")
-    
     // 8
     removeActivityIndicator()
+  }
+  
+  
+  @IBAction func takePhoto(sender: AnyObject)
+  {
+    // 1
+    view.endEditing(true)
+    moveViewDown()
+    
+    // 2
+    let imagePickerActionSheet = UIAlertController(title: "Snap/Upload Photo",
+      message: nil, preferredStyle: .ActionSheet)
+    
+    // 3
+    if UIImagePickerController.isSourceTypeAvailable(.Camera)
+    {
+      let cameraButton = UIAlertAction(title: "Take Photo", style: .Default)
+        {
+          (alert) -> Void in
+          let imagePicker = UIImagePickerController()
+          imagePicker.delegate = self
+          imagePicker.sourceType = .Camera
+          self.presentViewController(imagePicker, animated: true, completion: nil)
+      }
+      imagePickerActionSheet.addAction(cameraButton)
+    }
+    
+    // 4
+    let libraryButton = UIAlertAction(title: "Choose Existing", style: .Default)
+      {
+        (alert) -> Void in
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .PhotoLibrary
+        self.presentViewController(imagePicker, animated: true, completion: nil)
+    }
+    
+    imagePickerActionSheet.addAction(libraryButton)
+    
+    // 5
+    let cancelButton = UIAlertAction(title: "Cancel", style: .Cancel)
+      {
+        (alert) -> Void in
+    }
+    
+    imagePickerActionSheet.addAction(cancelButton)
+    
+    // 6
+    presentViewController(imagePickerActionSheet, animated: true, completion: nil)
   }
   
 }
