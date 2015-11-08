@@ -1,10 +1,5 @@
 //
 //  ViewController.swift
-//  LoveInASnap
-//
-//  Created by Lyndsey Scott on 1/11/15
-//  for http://www.raywenderlich.com/
-//  Copyright (c) 2015 Lyndsey Scott. All rights reserved.
 //
 
 import UIKit
@@ -85,7 +80,7 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
     // 2
     textView.text =
       textView.text.stringByReplacingOccurrencesOfString(findTextField.text!,
-        withString: replaceTextField.text!, options: [], range: nil)
+        withString: replaceTextField.text!)
 
     // 3
     findTextField.text = nil
@@ -196,8 +191,8 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
     let tesseract = G8Tesseract()
 
     // 2
-    tesseract.language = "eng+fra"
-
+    tesseract.language = "eng"
+    tesseract.charWhitelist = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ<"
     // 3
     tesseract.engineMode = .TesseractCubeCombined
 
@@ -237,7 +232,7 @@ extension ViewController: UITextFieldDelegate {
 
 extension ViewController: UIImagePickerControllerDelegate {
   func imagePickerController(picker: UIImagePickerController,
-    didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    didFinishPickingMediaWithInfo info: [String: AnyObject]) {
       let selectedPhoto = info[UIImagePickerControllerOriginalImage] as! UIImage
       let scaledImage = scaleImage(selectedPhoto, maxDimension: 640)
 
