@@ -138,6 +138,7 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
       strSurName = strTemp.substringToIndex(index!)
     }
     strLocalName = strLocalName.stringByReplacingOccurrencesOfString("+", withString: " ")
+    strLocalName = strLocalName.stringByReplacingOccurrencesOfString("<", withString: " ")
     strSurName = strSurName.stringByReplacingOccurrencesOfString("<", withString: " ")
     
     self.givenName = strLocalName.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
@@ -193,11 +194,29 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
     return Suma % 10
   }
   
+  func ChangeLettersToNumbers(str: String) -> String
+  {
+    var strToReturn = str.stringByReplacingOccurrencesOfString("O", withString: "0")
+    strToReturn = strToReturn.stringByReplacingOccurrencesOfString("Z", withString: "2")
+    strToReturn = strToReturn.stringByReplacingOccurrencesOfString("U", withString: "0")
+    strToReturn = strToReturn.stringByReplacingOccurrencesOfString("A", withString: "4")
+    
+    return strToReturn
+  }
+  
   // Checa todos los datos que se leyeron del pasaporte
   func checkData(var strDatos: String)
   {
     strDatos = strDatos.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-    strDatos = strDatos[0...43] + strDatos[46...strDatos.characters.count - 1]
+    if strDatos.characters.count == 89
+    {
+      strDatos = strDatos[0...43] + strDatos[45...strDatos.characters.count - 1]
+    }
+    else if strDatos.characters.count == 90
+    {
+      strDatos = strDatos[0...43] + strDatos[46...strDatos.characters.count - 1]
+    }
+    
     // Checa que se tenga la cantidad de caracteres correcta
     if strDatos.characters.count < 88 || strDatos.characters.count > 88
     {
@@ -237,7 +256,8 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
       checkName(strFirstRow[5...43])
       
       // Checa el numero de pasaporte y su numero verificador
-      let strPassportNumber = strSecondRow[1...9].stringByReplacingOccurrencesOfString("O", withString: "0")
+      let strPassportNumber = ChangeLettersToNumbers(strSecondRow[1...9])
+      
       if CheckNumVerif(strSecondRow[0].stringByReplacingOccurrencesOfString("0", withString: "O") +
         strPassportNumber[0...7]) != Int(strPassportNumber[8])!
       {
@@ -260,7 +280,7 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
       }
       
       // Valida la fecha de nacimiento
-      let strBirthDate = strSecondRow[13...19].stringByReplacingOccurrencesOfString("O", withString: "0")
+      let strBirthDate = ChangeLettersToNumbers(strSecondRow[13...19])
       if(!(checkBirthDate(strBirthDate[0...5])) && CheckNumVerif(strBirthDate[0...5]) != Int(strBirthDate[6])!)
       {
         errorInValidation("Fecha de nacimiento invalida")
@@ -283,7 +303,7 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
       }
       
       // Valida la fecha de expiracion
-      let strExpDate = strSecondRow[21...27].stringByReplacingOccurrencesOfString("O",withString: "0")
+      let strExpDate = ChangeLettersToNumbers(strSecondRow[21...27])
       if (!(checkExpirationDate(strExpDate[0...5])) && CheckNumVerif(strExpDate[0...5]) != Int(strExpDate[6])!)
       {
         errorInValidation("Fecha de Expiracion invalida")
@@ -295,8 +315,7 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
       }
       
       // Checa el personal Number
-      if CheckNumVerif(strSecondRow[28...41]) !=
-        Int(strSecondRow[42].stringByReplacingOccurrencesOfString("O", withString: "0"))!
+      if CheckNumVerif(strSecondRow[28...41]) != Int(ChangeLettersToNumbers(strSecondRow[42]))
       {
         errorInValidation("Personal number invalido")
         return
@@ -307,7 +326,7 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
       }
       
       var secondPart = strSecondRow[1...9] + strSecondRow[13...19] + strSecondRow[21...43]
-      secondPart = secondPart.stringByReplacingOccurrencesOfString("O", withString: "0")
+      secondPart = ChangeLettersToNumbers(secondPart)
       
       let firstPart = "" + strSecondRow[0].stringByReplacingOccurrencesOfString("0", withString: "O")
       
