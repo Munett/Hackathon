@@ -60,6 +60,7 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
     originalTopMargin = topMarginConstraint.constant
   }
   
+  //MARK - Keyboard
   //-------------------------------------------------------------------------------------------------
   @IBAction func backgroundTapped(sender: AnyObject)
   {
@@ -67,10 +68,10 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
     moveViewDown()
   }
   
+  //MARK - CoreData
   //-------------------------------------------------------------------------------------------------
   @IBAction func save()
   {
-    // 1
     if textView.text.isEmpty
     {
       return
@@ -95,10 +96,9 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
     let strInfo = "PERSONAL INFORMATION: \n" + "Name: " + self.givenName + " " + self.surName + "\n" + "Sex: " +
       self.sex + "\n" + "Birth Date (MM/DD/YY): " + self.birthDate[2...3] + "/" + self.birthDate[4...5] + "/" +
       self.birthDate[0...1] + "\n" + "Nationality: " + self.nationality + "\n" +
-      "-------------------------------" + "\n" +
-      "PASSPORT INFORMATION:" + "\n" + "Issuing Country: " + self.issuingCountry + "\n" + "Passport Number: " +
-      self.passportNumber + "\n" + "Expiration Date (MM/DD/YY): " + self.expDate[2...3] + "/" + self.expDate[4...5] +
-      "/" + self.expDate[0...1]
+      "-------------------------------" + "\n" + "PASSPORT INFORMATION:" + "\n" + "Issuing Country: " +
+      self.issuingCountry + "\n" + "Passport Number: " + self.passportNumber + "\n" + "Expiration Date (MM/DD/YY): " +
+      self.expDate[2...3] + "/" + self.expDate[4...5] + "/" + self.expDate[0...1]
     
     let alert = UIAlertController(title: "Pasport Scanned!", message: strInfo,
       preferredStyle: UIAlertControllerStyle.Alert)
@@ -113,15 +113,12 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
   {
     let fetchRequest = NSFetchRequest(entityName: "Passport")
     
-    // Create a sort descriptor object that sorts on the "title"
-    // property of the Core Data object
     let sortDescriptor = NSSortDescriptor(key: "givenName", ascending: true)
     
-    // Set the list of sort descriptors in the fetch request,
-    // so it includes the sort descriptor
     fetchRequest.sortDescriptors = [sortDescriptor]
   }
   
+  //MARK - DataCheck
   //-------------------------------------------------------------------------------------------------
   // Separa los nombres y quita los '<' sobrantes
   func checkName(strName: String)
@@ -281,7 +278,7 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
       
       // Valida la fecha de nacimiento
       let strBirthDate = ChangeLettersToNumbers(strSecondRow[13...19])
-      if(!(checkBirthDate(strBirthDate[0...5])) && CheckNumVerif(strBirthDate[0...5]) != Int(strBirthDate[6])!)
+      if(!(checkBirthDate(strBirthDate[0...5])) || CheckNumVerif(strBirthDate[0...5]) != Int(strBirthDate[6])!)
       {
         errorInValidation("Fecha de nacimiento invalida")
         return
