@@ -12,31 +12,29 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
   @IBOutlet weak var topMarginConstraint: NSLayoutConstraint!
   
   // Debe de ser P indicando que es pasaporte. Index[0]
-  var documentType: String!
+  var documentType = ""
   // Pais que expide el pasaporte (Debe ser Mexico) Index[2-4]
-  var issuingCountry: String!
+  var issuingCountry = ""
   // Apellidos y nombre Index[5-43]
-  var surName: String!
-  var givenName: String!
+  var surName = ""
+  var givenName = ""
   // Numero de Pasaporte Index[0-8]
-  var passportNumber: String!
-  // Digito de verificacion de pasaporte. Index[9]
-  var passVerNumber: Int!
+  var passportNumber = ""
   // Nacionalidad. Index[10-12]
-  var nationality: String!
+  var nationality = ""
   // Fecha de nacimiento. YYMMDD. Index[13-18]
-  var birthDate: Int!
+  var birthDate = ""
   // Sexo. M o F o < Index[20]
-  var sex: String!
+  var sex = ""
   // Personal Number
-  var personalNumber: String!
+  var personalNumber = ""
   // Fecha de expiración del pasaporte. YYMMDD. Index[21-26]
-  var expDate: Int!
+  var expDate = ""
   
   var valoresABC: [String: Int] =
   ["1":1, "2":2,"3":3, "4":4,
     "5":5, "6":6, "7":7, "8":8,
-    "9":9, "10":10,
+    "9":9, "0":0,
     "A":10, "B":11,"C":12, "D":13,
     "E":14, "F":15, "G":16, "H":17,
     "I":18, "J":19,"K":20, "L":21,
@@ -138,32 +136,44 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
   // Separa los nombres y quita los '<' sobrantes
   func checkName(strName: String)
   {
+    var strSurName = ""
+    var strLocalName = ""
     
+    let strTemp = strName.stringByReplacingOccurrencesOfString("<<", withString: "+")
+    let index = strTemp.characters.indexOf("+")
+    
+    if(index != nil)
+    {
+      strLocalName = strTemp.substringFromIndex(index!)
+      strSurName = strTemp.substringToIndex(index!)
+    }
+    strLocalName = strLocalName.stringByReplacingOccurrencesOfString("+", withString: " ")
+    strSurName = strSurName.stringByReplacingOccurrencesOfString("<", withString: " ")
+    
+    self.givenName = strLocalName.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+    self.surName = strSurName.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
   }
   
   // Checa la fecha de nacimiento. No puede ser mayor a la actual.
   func checkBirthDate(strDate: String) -> Bool
   {
-    
-    // Checa Fecha de nacimiento y su numero verificado
-    
-    if Int(strBirthDate[13...14]) > 15 &&
-      Int(strBirthDate[13...14]) < 30
+    // Checa Fecha de nacimiento
+    if Int(strDate[0...1]) > 15 && Int(strDate[0...1]) < 30
     {
-      errorInValidation("Fecha de nacimiento incorrecta")
-      return
+      return false
     }
-    else
-    {
-      passportNumber = strSecondRow[0] + strPassportNumber
-    }
-    return false
+    return true
   }
   
   // Checa la fecha de expiración. Si es anterior a la fecha actual, manda una alerta de vencimiento.
   func checkExpirationDate(strDate: String) -> Bool
   {
-    
+    // Checa Fecha de expiracion
+    if Int(strDate[0...1]) < 15
+    {
+      return false
+    }
+    return true
   }
   
   // Calcula el numero de verificacion para comprarlo contra el que se leyo
@@ -171,7 +181,6 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
   {
     var Suma = 0
     var vuelta = 1
-    var temp: Int!
     
     for var i = 0; i < str.characters.count; i++
     {
@@ -190,26 +199,27 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
         Suma += valoresABC[str[i]]! * 1
         vuelta = 1
       }
-      temp = Suma % 10
     }
-    
-    return temp
+    return Suma % 10
   }
   
   // Checa todos los datos que se leyeron del pasaporte
-  func checkData(strDatos: String)
+  func checkData(var strDatos: String)
   {
+    strDatos = strDatos.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+    strDatos = strDatos[0...43] + strDatos[46...strDatos.characters.count - 1]
     // Checa que se tenga la cantidad de caracteres correcta
     if strDatos.characters.count < 88 || strDatos.characters.count > 88
     {
+      print(strDatos.characters.count, separator: " ", terminator: "\n")
       errorInValidation("Cantidad de caracteres incorrecta")
     }
-    
+      
     else
     {
       // Separa los datos en 2 lineas
       let strFirstRow = strDatos[0...43]
-      let strSecondRow = strDatos[43...87]
+      let strSecondRow = strDatos[44...87]
       
       // Checa que el tipo de documento sea pasaporte
       if strFirstRow[0] != "P"
@@ -239,14 +249,14 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
       // Checa el numero de pasaporte y su numero verificador
       let strPassportNumber = strSecondRow[1...9].stringByReplacingOccurrencesOfString("O", withString: "0")
       if CheckNumVerif(strSecondRow[0].stringByReplacingOccurrencesOfString("0", withString: "O") +
-        strPassportNumber[0...8]) != Int(strPassportNumber[8])!
+        strPassportNumber[0...7]) != Int(strPassportNumber[8])!
       {
         errorInValidation("Numero de pasaporte incorrecto")
         return
       }
       else
       {
-        passportNumber = strSecondRow[0] + strPassportNumber
+        passportNumber = strSecondRow[0] + strPassportNumber[0...7]
       }
       
       // Checa la nacionalidad
@@ -268,11 +278,11 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
       }
       else
       {
-        birthDate = Int(strBirthDate[0...5])
+        birthDate = strBirthDate[0...5]
       }
       
       // Valida el Sexo
-      if strSecondRow[20] != "F" || strSecondRow[20] != "M" || strSecondRow[20] != "<"
+      if strSecondRow[20] != "F" && strSecondRow[20] != "M" && strSecondRow[20] != "<"
       {
         errorInValidation("Error en el sexo")
         return
@@ -283,7 +293,7 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
       }
       
       // Valida la fecha de expiracion
-      let strExpDate = strSecondRow[21...27].stringByReplacingOccurrencesOfString("O", withString: "0")
+      let strExpDate = strSecondRow[21...27].stringByReplacingOccurrencesOfString("O",withString: "0")
       if (!(checkExpirationDate(strExpDate[0...5])) && CheckNumVerif(strExpDate[0...5]) != Int(strExpDate[6])!)
       {
         errorInValidation("Fecha de Expiracion invalida")
@@ -291,7 +301,7 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
       }
       else
       {
-        expDate = Int(strBirthDate[0...5])
+        expDate = strExpDate[0...5]
       }
       
       // Checa el personal Number
@@ -308,9 +318,10 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
       
       var secondPart = strSecondRow[1...9] + strSecondRow[13...19] + strSecondRow[21...43]
       secondPart = secondPart.stringByReplacingOccurrencesOfString("O", withString: "0")
-      let firstPart = strSecondRow[0].stringByReplacingOccurrencesOfString("0", withString: "O")
       
-      if CheckNumVerif(firstPart + secondPart[0...37]) != Int(strSecondRow[38])
+      let firstPart = "" + strSecondRow[0].stringByReplacingOccurrencesOfString("0", withString: "O")
+      
+      if CheckNumVerif(firstPart + secondPart[0...37]) != Int(secondPart[38])
       {
         errorInValidation("Error en el CheckNumber")
         return
@@ -419,11 +430,14 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
     textView.text = tesseract.recognizedText
     textView.editable = true
     
+    checkData(textView.text)
+    print(documentType + issuingCountry + surName + givenName + passportNumber + nationality + birthDate + sex + personalNumber + expDate, separator: " ", terminator: "\n")
+    
     // 8
     removeActivityIndicator()
   }
+  
 }
-
 extension ViewController: UITextFieldDelegate
 {
   func textFieldDidBeginEditing(textField: UITextField)
@@ -460,17 +474,17 @@ extension ViewController: UIImagePickerControllerDelegate
 extension String
 {
   subscript (i: Int) -> Character
-    {
-      return self[self.startIndex.advancedBy(i)]
+  {
+    return self[self.startIndex.advancedBy(i)]
   }
   
   subscript (i: Int) -> String
-    {
-      return String(self[i] as Character)
+  {
+    return String(self[i] as Character)
   }
   
   subscript (r: Range<Int>) -> String
-    {
-      return substringWithRange(Range(start: startIndex.advancedBy(r.startIndex), end: startIndex.advancedBy(r.endIndex)))
+  {
+    return substringWithRange(Range(start: startIndex.advancedBy(r.startIndex), end: startIndex.advancedBy(r.endIndex)))
   }
 }
