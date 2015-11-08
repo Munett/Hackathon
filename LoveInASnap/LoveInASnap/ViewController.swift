@@ -25,19 +25,25 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
   // Nacionalidad. Index[10-12]
   var nationality: String!
   // Fecha de nacimiento. YYMMDD. Index[13-18]
-  var dateOfBirth: Int!
-  // Digito de verificacion de fecha de nacimiento. Index[19]
-  var birthVerNumber: Int!
+  var birthDate: Int!
   // Sexo. M o F o < Index[20]
   var sex: String!
+  // Personal Number
+  var personalNumber: String!
   // Fecha de expiración del pasaporte. YYMMDD. Index[21-26]
   var expDate: Int!
-  // Digito de verificacion de expiracion. Index[27]
-  var expVerNumber: Int!
-  // Digito de verificacion del personal number. (Es cero). Index[42]
-  var perVerNumber: Int!
-  // Digito verificador num pasaporte, de fecha de nacimiento, expiracion y personal number
-  var lastVerNumber: Int!
+  
+  var valoresABC: [String: Int] =
+  ["1":1, "2":2,"3":3, "4":4,
+    "5":5, "6":6, "7":7, "8":8,
+    "9":9, "10":10,
+    "A":10, "B":11,"C":12, "D":13,
+    "E":14, "F":15, "G":16, "H":17,
+    "I":18, "J":19,"K":20, "L":21,
+    "M":22, "N":23, "O":24, "P":25,
+    "Q":26, "R":27,"S":28, "T":29,
+    "U":30, "V":31, "W":32, "X":33,
+    "Y":34 ,"Z":35, "<":0]
   
   var activityIndicator:UIActivityIndicatorView!
   var originalTopMargin:CGFloat!
@@ -135,28 +141,59 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
     
   }
   
-  // Checa el numero de Pasaporte.
-  func checkPassportNumber(strNumber: String)
-  {
-    
-  }
-  
   // Checa la fecha de nacimiento. No puede ser mayor a la actual.
-  func checkBirthDate(strDate: String)
+  func checkBirthDate(strDate: String) -> Bool
   {
     
+    // Checa Fecha de nacimiento y su numero verificado
+    
+    if Int(strBirthDate[13...14]) > 15 &&
+      Int(strBirthDate[13...14]) < 30
+    {
+      errorInValidation("Fecha de nacimiento incorrecta")
+      return
+    }
+    else
+    {
+      passportNumber = strSecondRow[0] + strPassportNumber
+    }
+    return false
   }
   
   // Checa la fecha de expiración. Si es anterior a la fecha actual, manda una alerta de vencimiento.
-  func checkExpirationDate(strDate: String)
+  func checkExpirationDate(strDate: String) -> Bool
   {
     
   }
   
   // Calcula el numero de verificacion para comprarlo contra el que se leyo
-  func verificationNumber(strNumber: String) -> Int
+  func CheckNumVerif (str: String) -> Int
   {
-    return 0
+    var Suma = 0
+    var vuelta = 1
+    var temp: Int!
+    
+    for var i = 0; i < str.characters.count; i++
+    {
+      if vuelta == 1
+      {
+        Suma += valoresABC[str[i]]! * 7
+        vuelta++
+      }
+      else if vuelta == 2
+      {
+        Suma += valoresABC[str[i]]! * 3
+        vuelta++
+      }
+      else if vuelta == 3
+      {
+        Suma += valoresABC[str[i]]! * 1
+        vuelta = 1
+      }
+      temp = Suma % 10
+    }
+    
+    return temp
   }
   
   // Checa todos los datos que se leyeron del pasaporte
@@ -178,6 +215,7 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
       if strFirstRow[0] != "P"
       {
         errorInValidation("Tipo de documento invalido")
+        return
       }
       else
       {
@@ -188,6 +226,7 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
       if strFirstRow[2...4] != "MEX"
       {
         errorInValidation("No es un pasaporte mexicano")
+        return
       }
       else
       {
@@ -195,10 +234,20 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
       }
       
       // Checa los nombres y apellidos de las personas
-      checkData(strFirstRow[5...43])
+      checkName(strFirstRow[5...43])
       
       // Checa el numero de pasaporte y su numero verificador
-      checkPassportNumber(strSecondRow[0...9])
+      let strPassportNumber = strSecondRow[1...9].stringByReplacingOccurrencesOfString("O", withString: "0")
+      if CheckNumVerif(strSecondRow[0].stringByReplacingOccurrencesOfString("0", withString: "O") +
+        strPassportNumber[0...8]) != Int(strPassportNumber[8])!
+      {
+        errorInValidation("Numero de pasaporte incorrecto")
+        return
+      }
+      else
+      {
+        passportNumber = strSecondRow[0] + strPassportNumber
+      }
       
       // Checa la nacionalidad
       if strSecondRow[10...12] != "MEX"
@@ -210,7 +259,62 @@ class ViewController: UIViewController, UITextViewDelegate, UINavigationControll
         nationality = "MEX"
       }
       
+      // Valida la fecha de nacimiento
+      let strBirthDate = strSecondRow[13...19].stringByReplacingOccurrencesOfString("O", withString: "0")
+      if(!(checkBirthDate(strBirthDate[0...5])) && CheckNumVerif(strBirthDate[0...5]) != Int(strBirthDate[6])!)
+      {
+        errorInValidation("Fecha de nacimiento invalida")
+        return
+      }
+      else
+      {
+        birthDate = Int(strBirthDate[0...5])
+      }
       
+      // Valida el Sexo
+      if strSecondRow[20] != "F" || strSecondRow[20] != "M" || strSecondRow[20] != "<"
+      {
+        errorInValidation("Error en el sexo")
+        return
+      }
+      else
+      {
+        sex = strSecondRow[20]
+      }
+      
+      // Valida la fecha de expiracion
+      let strExpDate = strSecondRow[21...27].stringByReplacingOccurrencesOfString("O", withString: "0")
+      if (!(checkExpirationDate(strExpDate[0...5])) && CheckNumVerif(strExpDate[0...5]) != Int(strExpDate[6])!)
+      {
+        errorInValidation("Fecha de Expiracion invalida")
+        return
+      }
+      else
+      {
+        expDate = Int(strBirthDate[0...5])
+      }
+      
+      // Checa el personal Number
+      if CheckNumVerif(strSecondRow[28...41]) !=
+        Int(strSecondRow[42].stringByReplacingOccurrencesOfString("O", withString: "0"))!
+      {
+        errorInValidation("Personal number invalido")
+        return
+      }
+      else
+      {
+        personalNumber = strSecondRow[28...41]
+      }
+      
+      var secondPart = strSecondRow[1...9] + strSecondRow[13...19] + strSecondRow[21...43]
+      secondPart = secondPart.stringByReplacingOccurrencesOfString("O", withString: "0")
+      let firstPart = strSecondRow[0].stringByReplacingOccurrencesOfString("0", withString: "O")
+      
+      if CheckNumVerif(firstPart + secondPart[0...37]) != Int(strSecondRow[38])
+      {
+        errorInValidation("Error en el CheckNumber")
+        return
+      }
     }
   }
   
