@@ -21,6 +21,9 @@
 		9587FD441BEF957D00CC99F1 /* ResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9587FD431BEF957D00CC99F1 /* ResultsTableViewController.swift */; };
 		9587FD471BEF963A00CC99F1 /* MyPass.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9587FD451BEF963A00CC99F1 /* MyPass.xcdatamodeld */; };
 		9587FD4D1BEFB8B500CC99F1 /* Passport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9587FD4C1BEFB8B500CC99F1 /* Passport.swift */; };
+		9587FD561BEFC01600CC99F1 /* 2botones.png in Resources */ = {isa = PBXBuildFile; fileRef = 9587FD4F1BEFC01600CC99F1 /* 2botones.png */; };
+		9587FD5A1BEFC01600CC99F1 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9587FD531BEFC01600CC99F1 /* Icon.png */; };
+		9587FD5B1BEFC01600CC99F1 /* PantallaInicio.png in Resources */ = {isa = PBXBuildFile; fileRef = 9587FD541BEFC01600CC99F1 /* PantallaInicio.png */; };
 		95D327FE1BEEF42B002DB2CF /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 95D327FD1BEEF42B002DB2CF /* libstdc++.6.0.9.dylib */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +56,9 @@
 		9587FD431BEF957D00CC99F1 /* ResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsTableViewController.swift; sourceTree = "<group>"; };
 		9587FD461BEF963A00CC99F1 /* MyPass.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyPass.xcdatamodel; sourceTree = "<group>"; };
 		9587FD4C1BEFB8B500CC99F1 /* Passport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Passport.swift; sourceTree = "<group>"; };
+		9587FD4F1BEFC01600CC99F1 /* 2botones.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2botones.png; sourceTree = "<group>"; };
+		9587FD531BEFC01600CC99F1 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		9587FD541BEFC01600CC99F1 /* PantallaInicio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PantallaInicio.png; sourceTree = "<group>"; };
 		95D327FD1BEEF42B002DB2CF /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "../../../../../usr/lib/libstdc++.6.0.9.dylib"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,6 +86,7 @@
 		041EDBC01A625CEC00ECDA48 = {
 			isa = PBXGroup;
 			children = (
+				9587FD4E1BEFC01600CC99F1 /* ios app */,
 				95D327FD1BEEF42B002DB2CF /* libstdc++.6.0.9.dylib */,
 				7821EDD21A8C7A9C009573CF /* TesseractOCR.framework */,
 				7821EDD61A8C7AC3009573CF /* CoreImage.framework */,
@@ -144,6 +151,16 @@
 				041EDBE31A625CED00ECDA48 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9587FD4E1BEFC01600CC99F1 /* ios app */ = {
+			isa = PBXGroup;
+			children = (
+				9587FD4F1BEFC01600CC99F1 /* 2botones.png */,
+				9587FD531BEFC01600CC99F1 /* Icon.png */,
+				9587FD541BEFC01600CC99F1 /* PantallaInicio.png */,
+			);
+			path = "ios app";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -229,9 +246,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				041EDBD41A625CEC00ECDA48 /* Main.storyboard in Resources */,
+				9587FD5B1BEFC01600CC99F1 /* PantallaInicio.png in Resources */,
 				041EDBF01A625D9200ECDA48 /* Envelope.png in Resources */,
 				041EDBF11A625D9200ECDA48 /* Swap.png in Resources */,
 				041EDBD91A625CEC00ECDA48 /* LaunchScreen.xib in Resources */,
+				9587FD561BEFC01600CC99F1 /* 2botones.png in Resources */,
+				9587FD5A1BEFC01600CC99F1 /* Icon.png in Resources */,
 				041EDBD61A625CEC00ECDA48 /* Images.xcassets in Resources */,
 				7821EDD51A8C7AA3009573CF /* tessdata in Resources */,
 			);
